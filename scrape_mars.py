@@ -135,48 +135,50 @@ def mars_facts():
 
 ## > SCRAPE HEMISPHERE <
 
-def hemisphere(browser):
+# def hemisphere(browser):
     
-    hemisphere_image_urls = []
+#     hemisphere_image_urls = []
+#     hemURL = 'https://marshemispheres.com/'
+#     browser.visit(hemURL)
+
+#     html = browser.html
+#     # Parse HTML with Beautiful Soup
+#     soup = bs(html, 'html.parser')
+#     item =bs.find('div', class_ = 'collapsible results').find('h2', class_ = 'item')
+
+
+#     for x in item:
+#         #image title
+#         imgTitle = x.find('h3').text
+#         #click on the link to get larger images size
+#         browser.click_link_by_partial_text(imgTitle)
+#         # HTML object
+#         html = browser.html
+#         # Parse HTML with Beautiful Soup
+#         soup = bs(html, 'html.parser')
+
+#         imgURL = bs.find('div', class_ = 'downloads').find('li').find('a')['href']
+
+#         dictionary = {"Title" : imgTitle, "img_url": hemURL + imgURL}
+#         hemisphere_image_urls.append(dictionary)
+#         #moving back on the browser https://splinter.readthedocs.io/en/latest/browser.html
+#         browser.back()
+        
+#     return hemisphere_image_urls
+
+def scrap_hemisphere(html_text):
+    
     hemURL = 'https://marshemispheres.com/'
-    browser.visit(hemURL)
-
-    html = browser.html
-    # Parse HTML with Beautiful Soup
-    soup = bs(html, 'html.parser')
-    item =bs.find('div', class_ = 'collapsible results').find('div', class_ = 'item')
-
-
-    for x in item:
-        #image title
-        imgTitle = x.find('h3').text
-        #click on the link to get larger images size
-        browser.click_link_by_partial_text(imgTitle)
-        # HTML object
-        html = browser.html
-        # Parse HTML with Beautiful Soup
-        soup = bs(html, 'html.parser')
-
-        imgURL = bs.find('div', class_ = 'downloads').find('li').find('a')['href']
-
-        dictionary = {"Title" : imgTitle, "img_url": hemURL + imgURL}
-        hemisphere_image_urls.append(dictionary)
-        #moving back on the browser https://splinter.readthedocs.io/en/latest/browser.html
-        browser.back()
-        
-    return hemisphere_image_urls
-
-# def scrap_hemisphere(html_text):
-#     hemisphere_soup = soup(html_text, 'html.parser')
+    hemisphere_soup = bs(html_text, 'html.parser')
     
-#     try:
-#         title_element = hemisphere_soup.find('h2', class_ = 'title').get_text()
-#         picture_element = hemisphere_soup.find('a', text='Sample').get('href')
+try:
+        title_element = hemisphere_soup.find('h2', class_ = 'title').get_text()
+        picture_element = hemisphere_soup.find('a', text='Sample').get('href')
         
-#     except:
-#         "sorry, it doesn't work"
+except:
+         "sorry, it doesn't work"
      
-    # dictionary = {"Title" : imgTitle, "img_url": hemURL + imgURL}   
+dictionary = {"Title" : imgTitle, "img_url": hemURL + imgURL}   
     
 
 if __name__== "__main__":
